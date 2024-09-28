@@ -38,24 +38,11 @@
       </div>
 
       <div class="mt-3 scrollable-div">
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
-        <FileList file_name="hiarya" dest="/link" />
+        <FileList
+          v-if="selected_tab === 'file_tab'"
+          file_name="hiarya"
+          dest="/link"
+        />
       </div>
     </div>
   </div>
@@ -71,13 +58,14 @@ export default {
   },
   data() {
     return {
-      selected_tab: "files",
+      selected_tab: "file_tab",
       tab_list: ["file_tab", "text_tab", "link_tab", "setting_tab"],
     };
   },
   methods: {
     select_tab(tab_name) {
       let all_tabs = [];
+      this.selected_tab = tab_name;
       for (let i of this.tab_list) {
         all_tabs.push(i);
       }
