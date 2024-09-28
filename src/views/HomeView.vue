@@ -37,7 +37,24 @@
         </div>
       </div>
 
-      <div class="mt-3">
+      <div class="mt-3 scrollable-div">
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
+        <FileList file_name="hiarya" dest="/link" />
         <FileList file_name="hiarya" dest="/link" />
       </div>
     </div>
@@ -90,5 +107,25 @@ export default {
 
 .user-toolbox {
   background-color: #404040;
+}
+
+.scrollable-div {
+  height: 65%;
+  overflow-y: auto;
+}
+
+.scrollable-div::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border: 3px solid #42b983;
+  border-radius: 50px;
 }
 </style>
