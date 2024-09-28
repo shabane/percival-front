@@ -36,14 +36,22 @@
           </button>
         </div>
       </div>
+
+      <div class="mt-3">
+        <FileList file_name="hiarya" dest="/link" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import FileList from "@/components/FIleList";
+
 export default {
   name: "HomeView",
-  components: {},
+  components: {
+    FileList,
+  },
   data() {
     return {
       selected_tab: "files",
