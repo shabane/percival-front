@@ -3,10 +3,37 @@
     <div class="user-border col-9 col-lg-6">
       <div>
         <div class="user-toolbox">
-          <button class="btn btn-outline-secondary m-2">File</button>
-          <button class="btn btn-outline-secondary m-2">Text</button>
-          <button class="btn btn-outline-secondary m-2">Link</button>
-          <button class="btn btn-outline-secondary m-2">⚙️</button>
+          <button
+            class="btn btn-outline-info m-2"
+            id="file_tab"
+            @click="select_tab('file_tab')"
+          >
+            Files
+          </button>
+
+          <button
+            class="btn btn-outline-secondary m-2"
+            id="text_tab"
+            @click="select_tab('text_tab')"
+          >
+            Texts
+          </button>
+
+          <button
+            class="btn btn-outline-secondary m-2"
+            id="link_tab"
+            @click="select_tab('link_tab')"
+          >
+            Links
+          </button>
+
+          <button
+            class="btn btn-outline-secondary m-2"
+            id="setting_tab"
+            @click="select_tab('setting_tab')"
+          >
+            ⚙️
+          </button>
         </div>
       </div>
     </div>
@@ -17,6 +44,29 @@
 export default {
   name: "HomeView",
   components: {},
+  data() {
+    return {
+      selected_tab: "files",
+      tab_list: ["file_tab", "text_tab", "link_tab", "setting_tab"],
+    };
+  },
+  methods: {
+    select_tab(tab_name) {
+      let all_tabs = [];
+      for (let i of this.tab_list) {
+        all_tabs.push(i);
+      }
+      let index = all_tabs.indexOf(tab_name);
+      if (index > -1) {
+        all_tabs.splice(index, 1);
+        document.getElementById(tab_name).classList.add("btn-outline-info");
+        for (let _tab of all_tabs) {
+          document.getElementById(_tab).classList.remove("btn-outline-info");
+          document.getElementById(_tab).classList.add("btn-outline-secondary");
+        }
+      }
+    },
+  },
 };
 </script>
 
