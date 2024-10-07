@@ -46,11 +46,11 @@ exports.Files = class extends PercivalBase {
       });
   }
 
-  postFile(file) {
+  postFile(file, username) {
     const formDate = new FormData();
     formDate.append("files", file);
     return axios
-      .post(this.percival_api, formDate, {
+      .post(this.percival_api + `/?toUser=${username}`, formDate, {
         auth: this.auth,
         headers: { "Content-Type": "multipart/form-data" },
       })
