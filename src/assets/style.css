@@ -8,3 +8,26 @@
 .user-item:hover {
     background-color: #626570;
 }
+
+.username {
+    background: transparent;
+    border-radius: 10px;
+    border: 1px solid #1abc9c;
+    color: white;
+}
+
+input[type=file]::file-selector-button {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #1abc9c;
+    border-radius: 15px;
+    padding: 10px 15px;
+    margin-right: 20px;
+    transition: .5s;
+}
+
+input[type=file]::file-selector-button:hover {
+    background-color: #353535;
+    border: 1px solid #3498db;
+    color: #af7ac5;
+}

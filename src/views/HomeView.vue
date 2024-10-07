@@ -47,6 +47,22 @@
           />
         </div>
       </div>
+
+      <div class="g-3 bg-black bg-opacity-10">
+        <input
+          type="text"
+          class="col-auto form-control-sm m-1 username"
+          placeholder="UserName"
+        />
+
+        <input type="file" class="col-auto m-1 custom-file-upload" multiple />
+
+        <input
+          type="submit"
+          class="col-auto btn btn-outline-success"
+          value="➣"
+        />
+      </div>
     </div>
   </div>
 </template>
