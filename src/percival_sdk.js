@@ -30,6 +30,7 @@ exports.Files = class extends PercivalBase {
         return err;
       });
   }
+
   getFile(id) {
     return axios({
       url: this.percival_api + id,
@@ -39,6 +40,22 @@ exports.Files = class extends PercivalBase {
     })
       .then((response) => {
         return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+
+  postFile(file) {
+    const formDate = new FormData();
+    formDate.append("files", file);
+    return axios
+      .post(this.percival_api, formDate, {
+        auth: this.auth,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => {
+        return res.data;
       })
       .catch((err) => {
         return err;
