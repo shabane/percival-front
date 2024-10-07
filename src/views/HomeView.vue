@@ -53,14 +53,22 @@
           type="text"
           class="col-auto form-control-sm m-1 username"
           placeholder="UserName"
+          v-model="username"
         />
 
-        <input type="file" class="col-auto m-1 custom-file-upload" multiple />
+        <input
+          type="text"
+          class="col-auto form-control-sm m-1 message-box"
+          placeholder="Type Username To Send"
+          v-if="!username"
+          disabled
+        />
 
         <input
-          type="submit"
-          class="col-auto btn btn-outline-success"
-          value="➣"
+          type="file"
+          class="col-auto m-1 custom-file-upload"
+          @change="handleFileUpload"
+          v-if="username"
         />
       </div>
     </div>
@@ -81,6 +89,8 @@ export default {
       selected_tab: "file_tab",
       tab_list: ["file_tab", "text_tab", "link_tab", "setting_tab"],
       files: [],
+      file: null,
+      username: null,
     };
   },
   methods: {
@@ -135,6 +145,33 @@ export default {
           // creante new user
           console.log(err.message);
         });
+    },
+
+    handleFileUpload(event) {
+      this.file = event.target.files[0];
+      this.sendFile();
+    },
+
+    sendFile() {
+      if (this.file) {
+        this.$getCredits()
+          .then((credits) => {
+            const files = new Files(credits.username, credits.password);
+            files
+              .postFile(this.file)
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {
+                //TODO: show the error to user
+                console.log(err.message);
+              });
+          })
+          .catch((err) => {
+            // do the right stuff
+            console.log(err.message);
+          });
+      }
     },
   },
   mounted() {
