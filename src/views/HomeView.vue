@@ -158,7 +158,7 @@ export default {
           .then((credits) => {
             const files = new Files(credits.username, credits.password);
             files
-              .postFile(this.file)
+              .postFile(this.file, this.username)
               .then((res) => {
                 console.log(res);
               })
