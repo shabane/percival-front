@@ -46,6 +46,10 @@
             @click="get_file(file.id)"
           />
         </div>
+
+        <div v-if="selected_tab === 'text_tab'">
+          <TextList v-for="text in texts" :key="text.id" :text="text" />
+        </div>
       </div>
 
       <div class="g-3 bg-black bg-opacity-10">
@@ -77,12 +81,14 @@
 
 <script>
 import FileList from "@/components/FIleList";
-import { Files } from "@/percival_sdk";
+import TextList from "@/components/TextList";
+import { Files, Texts } from "@/percival_sdk";
 import Swal from "sweetalert2";
 
 export default {
   name: "HomeView",
   components: {
+    TextList,
     FileList,
   },
   data() {
@@ -92,6 +98,7 @@ export default {
       files: [],
       file: null,
       username: null,
+      texts: [],
     };
   },
   methods: {
@@ -188,9 +195,40 @@ export default {
           });
       }
     },
+
+    get_texts() {
+      this.$getCredits()
+        .then((credits) => {
+          let texts = new Texts(credits.username, credits.password);
+          texts
+            .listTexts()
+            .then((res) => {
+              // this.texts = res;
+              for (let text of res) {
+                texts
+                  .getText(text.id)
+                  .then((oneText) => {
+                    this.texts.push(oneText.data);
+                  })
+                  .catch((err) => {
+                    console.log(err.message);
+                  });
+              }
+            })
+            .catch((err) => {
+              //TODO: here we fucked again
+              console.log(err.message);
+            });
+        })
+        .catch((err) => {
+          //TODO: here we fuck
+          console.log(err.message);
+        });
+    },
   },
   mounted() {
     this.get_files();
+    this.get_texts();
   },
 };
 </script>
