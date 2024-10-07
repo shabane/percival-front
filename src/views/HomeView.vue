@@ -38,11 +38,14 @@
       </div>
 
       <div class="mt-3 scrollable-div">
-        <FileList
-          v-if="selected_tab === 'file_tab'"
-          file_name="hiarya"
-          dest="/link"
-        />
+        <div v-if="selected_tab === 'file_tab' && files">
+          <FileList
+            v-for="file in files"
+            :key="file.id"
+            :file_name="file.id"
+            :dest="file.id"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -61,6 +64,7 @@ export default {
     return {
       selected_tab: "file_tab",
       tab_list: ["file_tab", "text_tab", "link_tab", "setting_tab"],
+      files: [],
     };
   },
   methods: {
@@ -88,7 +92,7 @@ export default {
           files
             .listFiles()
             .then((files) => {
-              console.log(files);
+              this.files = files;
             })
             .catch((err) => {
               console.log(err);
