@@ -90,4 +90,20 @@ exports.Texts = class extends PercivalBase {
         return err;
       });
   }
+
+  postText(text, usernmae) {
+    const data = {
+      text: text,
+      username: usernmae,
+    };
+    return axios
+      .post(this.percival_api, data, { auth: this.auth })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
 };
+
