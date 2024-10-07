@@ -72,7 +72,7 @@
           type="file"
           class="col-auto m-1 custom-file-upload"
           @change="handleFileUpload"
-          v-if="username"
+          v-if="username && selected_tab === 'file_tab'"
         />
       </div>
     </div>
