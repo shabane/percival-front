@@ -1,5 +1,7 @@
 let axios = require("axios");
 
+exports.base_down_url = "http://127.0.0.1:3000/api";
+
 class PercivalBase {
   constructor(username, password) {
     this.username = username;
