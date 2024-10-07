@@ -30,4 +30,18 @@ exports.Files = class extends PercivalBase {
         return err;
       });
   }
+  getFile(id) {
+    return axios({
+      url: this.percival_api + id,
+      method: "GET",
+      responseType: "blob",
+      auth: this.auth,
+    })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
 };
