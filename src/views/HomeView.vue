@@ -74,6 +74,22 @@
           @change="handleFileUpload"
           v-if="username && selected_tab === 'file_tab'"
         />
+
+        <input
+          type="text"
+          class="col-5 form-control-sm m-1 message-box post-text"
+          placeholder="Your Text"
+          v-if="username && selected_tab === 'text_tab'"
+          v-model="input_text"
+        />
+
+        <input
+          type="button"
+          value=">"
+          class="btn btn-outline-success col-auto m-1"
+          v-if="selected_tab === 'text_tab' && username"
+          @click="send_text"
+        />
       </div>
     </div>
   </div>
@@ -99,6 +115,7 @@ export default {
       file: null,
       username: null,
       texts: [],
+      input_text: null,
     };
   },
   methods: {
@@ -225,6 +242,25 @@ export default {
           console.log(err.message);
         });
     },
+
+    send_text() {
+      this.$getCredits()
+        .then((credits) => {
+          const texts = new Texts(credits.username, credits.password);
+          texts
+            .postText(this.input_text, this.username)
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err.message);
+            });
+        })
+        .catch((err) => {
+          //TODO: some fucking thing here
+          console.log(err.message);
+        });
+    },
   },
   mounted() {
     this.get_files();
@@ -265,5 +301,17 @@ export default {
   background-color: transparent;
   border: 3px solid #42b983;
   border-radius: 50px;
+}
+
+.post-text {
+  border: 1px solid #1abc9c;
+  color: #ffffff;
+  border-radius: 10px;
+}
+
+.post-text:active,
+.post-text:focus {
+  outline: 1px solid #5dade2;
+  border: none;
 }
 </style>
