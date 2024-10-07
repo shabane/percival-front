@@ -8,24 +8,30 @@ import "./assets/style.css";
 // createApp(App).use(router).mount("#app");
 
 function getCookieValue(cookieName) {
-  const name = cookieName + "=";
-  const decodedCookie = decodeURIComponent(document.cookie);
-  const cookieArray = decodedCookie.split(";");
+  return new Promise((resolve, reject) => {
+    const name = cookieName + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(";");
 
-  for (let i = 0; i < cookieArray.length; i++) {
-    let cookie = cookieArray[i].trim();
-    if (cookie.indexOf(name) === 0) {
-      return cookie.substring(name.length, cookie.length);
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i].trim();
+      if (cookie.indexOf(name) === 0) {
+        resolve(cookie.substring(name.length, cookie.length));
+        return;
+      }
     }
-  }
-  return null;
+    reject(`Cookie with name ${cookieName} not found`);
+  });
 }
 
 function getCredits() {
-  return {
-    username: getCookieValue("username"),
-    password: getCookieValue("password"),
-  };
+  return Promise.all([
+    getCookieValue("username"),
+    getCookieValue("password"),
+  ]).then(([username, password]) => ({
+    username,
+    password,
+  }));
 }
 
 const app = createApp(App);
