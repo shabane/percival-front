@@ -1,14 +1,14 @@
 <template>
   <div class="row user-item m-3">
     <span class="col-1">⬇️</span>
-    <a :href="dest" class="col">{{ file_name }}</a>
+    <a class="col">{{ file_name }}</a>
   </div>
 </template>
 
 <script>
 export default {
   name: "FIleList",
-  props: ["file_name", "dest"],
+  props: ["file_name"],
 };
 </script>
 
