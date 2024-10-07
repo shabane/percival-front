@@ -79,4 +79,15 @@ exports.Texts = class extends PercivalBase {
         return err;
       });
   }
+
+  getText(id) {
+    return axios
+      .get(this.percival_api + `/${id}/`, { auth: this.auth })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
 };
