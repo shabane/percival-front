@@ -43,7 +43,7 @@
             v-for="file in files"
             :key="file.id"
             :file_name="file.id"
-            :dest="file.id"
+            :dest="file_down_url + file.id"
           />
         </div>
       </div>
@@ -53,7 +53,7 @@
 
 <script>
 import FileList from "@/components/FIleList";
-import { Files } from "@/percival_sdk";
+import { Files, base_down_url } from "@/percival_sdk";
 
 export default {
   name: "HomeView",
@@ -65,6 +65,7 @@ export default {
       selected_tab: "file_tab",
       tab_list: ["file_tab", "text_tab", "link_tab", "setting_tab"],
       files: [],
+      file_down_url: base_down_url + "/file/",
     };
   },
   methods: {
