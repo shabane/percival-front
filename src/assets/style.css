@@ -31,3 +31,11 @@ input[type=file]::file-selector-button:hover {
     border: 1px solid #3498db;
     color: #af7ac5;
 }
+
+.username:hover {
+    border-color: #3498db;
+}
+
+.username:focus, .username:active {
+    outline: none;
+}
