@@ -62,3 +62,21 @@ exports.Files = class extends PercivalBase {
       });
   }
 };
+
+exports.Texts = class extends PercivalBase {
+  constructor(username, password) {
+    super(username, password);
+    this.percival_api = this.percival_api + "/api/text/";
+  }
+
+  listTexts() {
+    return axios
+      .get(this.percival_api, { auth: this.auth })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+};
