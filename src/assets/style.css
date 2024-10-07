@@ -4,3 +4,7 @@
     padding: 3px;
     cursor: pointer;
 }
+
+.user-item:hover {
+    background-color: #626570;
+}
