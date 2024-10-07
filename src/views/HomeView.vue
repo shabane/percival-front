@@ -50,6 +50,7 @@
 
 <script>
 import FileList from "@/components/FIleList";
+import { Files } from "@/percival_sdk";
 
 export default {
   name: "HomeView",
@@ -79,6 +80,28 @@ export default {
         }
       }
     },
+
+    get_files() {
+      this.$getCredits()
+        .then((credits) => {
+          let files = new Files(credits.username, credits.password);
+          files
+            .listFiles()
+            .then((files) => {
+              console.log(files);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          // create new username and password
+          console.log(err);
+        });
+    },
+  },
+  mounted() {
+    this.get_files();
   },
 };
 </script>
