@@ -78,6 +78,7 @@
 <script>
 import FileList from "@/components/FIleList";
 import { Files } from "@/percival_sdk";
+import Swal from "sweetalert2";
 
 export default {
   name: "HomeView",
@@ -160,16 +161,30 @@ export default {
             files
               .postFile(this.file, this.username)
               .then((res) => {
-                console.log(res);
+                if (res.status >= 400) {
+                  Swal.fire({
+                    text: res.response.data,
+                    icon: "error",
+                  });
+                } else {
+                  Swal.fire({
+                    text: "File Sent > " + res[0].user,
+                    icon: "success",
+                  });
+                }
               })
               .catch((err) => {
-                //TODO: show the error to user
-                console.log(err.message);
+                Swal.fire({
+                  text: err.message,
+                  icon: "error",
+                });
               });
           })
           .catch((err) => {
-            // do the right stuff
-            console.log(err.message);
+            Swal.fire({
+              text: err.message,
+              icon: "error",
+            });
           });
       }
     },
