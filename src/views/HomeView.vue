@@ -43,7 +43,7 @@
             v-for="file in files"
             :key="file.id"
             :file_name="file.id"
-            :dest="file_down_url + file.id"
+            @click="get_file(file.id)"
           />
         </div>
       </div>
@@ -102,6 +102,23 @@ export default {
         .catch((err) => {
           // create new username and password
           console.log(err);
+        });
+    },
+
+    get_file(id) {
+      this.$getCredits()
+        .then((credits) => {
+          const files = new Files(credits.username, credits.password);
+          files.getFile(id).then((file) => {
+            const url = window.URL.createObjectURL(
+              new Blob([file], { type: file.type })
+            );
+            window.open(url);
+          });
+        })
+        .catch((err) => {
+          // creante new user
+          console.log(err.message);
         });
     },
   },
