@@ -250,10 +250,24 @@ export default {
           texts
             .postText(this.input_text, this.username)
             .then((res) => {
-              console.log(res);
+              if (res.status >= 400) {
+                Swal.fire({
+                  text: res.response.data,
+                  icon: "error",
+                });
+              } else {
+                Swal.fire({
+                  text: "Text Sent > " + res.user,
+                  icon: "success",
+                });
+              }
             })
             .catch((err) => {
-              console.log(err.message);
+              console.log(err);
+              Swal.fire({
+                text: err.message,
+                icon: "error",
+              });
             });
         })
         .catch((err) => {
