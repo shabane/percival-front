@@ -106,4 +106,3 @@ exports.Texts = class extends PercivalBase {
       });
   }
 };
-
