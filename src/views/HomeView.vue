@@ -329,6 +329,14 @@ export default {
     },
 
     send_link() {
+      if (!this.$isValidLink(this.input_link)) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Your Link Is Not Correct!",
+        });
+        return;
+      }
       this.$getCredits()
         .then((credits) => {
           const links = new Links(credits.username, credits.password);
@@ -345,6 +353,8 @@ export default {
                   text: "Link Sent > " + res.user,
                   icon: "success",
                 });
+                this.username = null;
+                this.input_link = null;
               }
             })
             .catch((err) => {

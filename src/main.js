@@ -4,6 +4,7 @@ import router from "./router";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./assets/style.css";
+import { isValidLink } from "@/tools";
 
 // createApp(App).use(router).mount("#app");
 
@@ -37,5 +38,6 @@ function getCredits() {
 const app = createApp(App);
 app.config.globalProperties.$getCookieValue = getCookieValue;
 app.config.globalProperties.$getCredits = getCredits;
+app.config.globalProperties.$isValidLink = isValidLink;
 app.use(router);
 app.mount("#app");
