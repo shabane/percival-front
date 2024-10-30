@@ -94,6 +94,22 @@
           v-if="selected_tab === 'text_tab' && username"
           @click="send_text"
         />
+
+        <input
+          type="text"
+          class="col-5 form-control-sm m-1 message-box post-text"
+          v-if="selected_tab === 'link_tab' && username"
+          placeholder="Insert Your Link Here..."
+          v-model="input_link"
+        />
+
+        <input
+          type="button"
+          value=">"
+          class="btn btn-outline-success col-auto m-1"
+          v-if="selected_tab === 'link_tab' && username && input_link"
+          @click="send_link"
+        />
       </div>
     </div>
   </div>
@@ -123,6 +139,7 @@ export default {
       texts: [],
       input_text: null,
       links: [],
+      input_link: null,
     };
   },
   methods: {
@@ -309,6 +326,38 @@ export default {
             });
         })
         .catch();
+    },
+
+    send_link() {
+      this.$getCredits()
+        .then((credits) => {
+          const links = new Links(credits.username, credits.password);
+          links
+            .postLink(this.input_link, this.username)
+            .then((res) => {
+              if (res.status >= 400) {
+                Swal.fire({
+                  text: res.response.data,
+                  icon: "error",
+                });
+              } else {
+                Swal.fire({
+                  text: "Link Sent > " + res.user,
+                  icon: "success",
+                });
+              }
+            })
+            .catch((err) => {
+              Swal.fire({
+                text: err.message,
+                icon: "error",
+              });
+            });
+        })
+        .catch((err) => {
+          //TODO: some fucking thing here
+          console.log(err.message);
+        });
     },
   },
   mounted() {
