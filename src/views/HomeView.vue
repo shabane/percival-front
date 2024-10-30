@@ -50,6 +50,10 @@
         <div v-if="selected_tab === 'text_tab'">
           <TextList v-for="text in texts" :key="text.id" :text="text" />
         </div>
+
+        <div v-if="selected_tab === 'link_tab' && links">
+          <LinkView v-for="link in links" :key="link.id" :dest="link.dest" />
+        </div>
       </div>
 
       <div class="g-3 bg-black bg-opacity-10">
@@ -98,7 +102,8 @@
 <script>
 import FileList from "@/components/FIleList";
 import TextList from "@/components/TextList";
-import { Files, Texts } from "@/percival_sdk";
+import LinkView from "@/components/LinkView";
+import { Files, Texts, Links } from "@/percival_sdk";
 import Swal from "sweetalert2";
 
 export default {
@@ -106,6 +111,7 @@ export default {
   components: {
     TextList,
     FileList,
+    LinkView,
   },
   data() {
     return {
@@ -116,6 +122,7 @@ export default {
       username: null,
       texts: [],
       input_text: null,
+      links: [],
     };
   },
   methods: {
@@ -146,6 +153,7 @@ export default {
               this.files = files;
             })
             .catch((err) => {
+              // use swal here.
               console.log(err);
             });
         })
@@ -274,10 +282,39 @@ export default {
           console.log(err.message);
         });
     },
+
+    get_links() {
+      this.$getCredits()
+        .then((credit) => {
+          const links = new Links(credit.username, credit.password);
+          links
+            .listLinks()
+            .then((res) => {
+              // this.links = res;
+              for (let link of res) {
+                links
+                  .getLink(link.id)
+                  .then((_link) => {
+                    this.links.push(_link);
+                  })
+                  .catch((err) => {
+                    // use swal
+                    console.log(err.message);
+                  });
+              }
+            })
+            .catch((err) => {
+              // use swal
+              console.log(err.message);
+            });
+        })
+        .catch();
+    },
   },
   mounted() {
     this.get_files();
     this.get_texts();
+    this.get_links();
   },
 };
 </script>
