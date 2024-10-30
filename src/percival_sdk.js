@@ -106,3 +106,47 @@ exports.Texts = class extends PercivalBase {
       });
   }
 };
+
+exports.Links = class extends PercivalBase {
+  constructor(username, password) {
+    super(username, password);
+    this.percival_api = this.percival_api + "/api/link/";
+  }
+
+  listLinks() {
+    return axios
+      .get(this.percival_api, { auth: this.auth })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+
+  getLink(id) {
+    return axios
+      .get(this.percival_api + `/${id}/`, { auth: this.auth })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+
+  postLink(dest, usernmae) {
+    const data = {
+      dest: dest,
+      username: usernmae,
+    };
+    return axios
+      .post(this.percival_api, data, { auth: this.auth })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+};
