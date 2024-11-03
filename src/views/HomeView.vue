@@ -54,9 +54,24 @@
         <div v-if="selected_tab === 'link_tab' && links">
           <LinkView v-for="link in links" :key="link.id" :dest="link.dest" />
         </div>
+
+        <div v-if="selected_tab === 'setting_tab'">
+          <div v-if="user.username" class="m-3">
+            <label class="col m-1" style="color: #f7dc6f">@</label>
+            <input class="userpass col-4" type="text" :value="user.username" />
+          </div>
+
+          <div v-if="user.password" class="m-3">
+            <label class="m-1">🔓</label>
+            <input class="userpass" type="text" :value="user.password" />
+          </div>
+        </div>
       </div>
 
-      <div class="g-3 bg-black bg-opacity-10">
+      <div
+        class="g-3 bg-black bg-opacity-10"
+        v-if="selected_tab !== 'setting_tab'"
+      >
         <input
           type="text"
           class="col-auto form-control-sm m-1 username"
@@ -140,6 +155,10 @@ export default {
       input_text: null,
       links: [],
       input_link: null,
+      user: {
+        username: null,
+        password: null,
+      },
     };
   },
   methods: {
@@ -379,6 +398,8 @@ export default {
         .then((user) => {
           this.$setCookie("username", username);
           this.$setCookie("password", password);
+          this.user.username = username;
+          this.user.password = password;
           return user;
         })
         .catch((err) => {
@@ -388,7 +409,9 @@ export default {
   },
   mounted() {
     this.$getCredits()
-      .then(() => {
+      .then((user) => {
+        this.user.username = user.username;
+        this.user.password = user.password;
         this.get_files();
         this.get_texts();
         this.get_links();
