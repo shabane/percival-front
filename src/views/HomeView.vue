@@ -65,6 +65,16 @@
             <label class="m-1">🔓</label>
             <input class="userpass" type="text" :value="user.password" />
           </div>
+
+          <div class="m-3">
+            <label class="m-1">🔄</label>
+            <input
+              class="userpass"
+              type="number"
+              :value="refresh_rate"
+              readonly
+            />
+          </div>
         </div>
       </div>
 
@@ -159,6 +169,7 @@ export default {
         username: null,
         password: null,
       },
+      refresh_rate: 5,
     };
   },
   methods: {
@@ -428,7 +439,7 @@ export default {
       });
     setInterval(() => {
       this.refresh();
-    }, 5000);
+    }, this.refresh_rate * 1000);
   },
 };
 </script>
