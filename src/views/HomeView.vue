@@ -119,7 +119,7 @@
 import FileList from "@/components/FIleList";
 import TextList from "@/components/TextList";
 import LinkView from "@/components/LinkView";
-import { Files, Texts, Links } from "@/percival_sdk";
+import { Files, Texts, Links, Users } from "@/percival_sdk";
 import Swal from "sweetalert2";
 
 export default {
@@ -369,11 +369,33 @@ export default {
           console.log(err.message);
         });
     },
+
+    add_new_user() {
+      let username = this.$usernamer().generate();
+      let password = this.$passworder(8).generate();
+      let users = new Users(username, password);
+      users
+        .newUser()
+        .then((user) => {
+          this.$setCookie("username", username);
+          this.$setCookie("password", password);
+          return user;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   mounted() {
-    this.get_files();
-    this.get_texts();
-    this.get_links();
+    this.$getCredits()
+      .then(() => {
+        this.get_files();
+        this.get_texts();
+        this.get_links();
+      })
+      .catch(() => {
+        this.add_new_user();
+      });
   },
 };
 </script>
