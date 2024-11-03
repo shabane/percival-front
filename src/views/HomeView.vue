@@ -408,6 +408,9 @@ export default {
     },
 
     refresh() {
+      this.files = [];
+      this.texts = [];
+      this.links = [];
       this.get_files();
       this.get_texts();
       this.get_links();
@@ -423,6 +426,9 @@ export default {
       .catch(() => {
         this.add_new_user();
       });
+    setInterval(() => {
+      this.refresh();
+    }, 5000);
   },
 };
 </script>
