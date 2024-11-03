@@ -150,3 +150,24 @@ exports.Links = class extends PercivalBase {
       });
   }
 };
+
+exports.Users = class extends PercivalBase {
+  constructor(username, password) {
+    super(username, password);
+    this.percival_api = this.percival_api + "/api/user/";
+  }
+
+  newUser() {
+    return axios
+      .post(this.percival_api, {
+        username: this.username,
+        password: this.password,
+      })
+      .then((data) => {
+        return data.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+};
