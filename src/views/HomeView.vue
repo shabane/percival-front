@@ -406,15 +406,19 @@ export default {
           console.log(err);
         });
     },
+
+    refresh() {
+      this.get_files();
+      this.get_texts();
+      this.get_links();
+    },
   },
   mounted() {
     this.$getCredits()
       .then((user) => {
         this.user.username = user.username;
         this.user.password = user.password;
-        this.get_files();
-        this.get_texts();
-        this.get_links();
+        this.refresh();
       })
       .catch(() => {
         this.add_new_user();
