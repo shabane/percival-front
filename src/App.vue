@@ -1,5 +1,6 @@
 <template>
   <div>
+    <HeaderBar />
     <router-view />
   </div>
 </template>
@@ -26,3 +27,11 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 </style>
+
+<script>
+import HeaderBar from "./components/HeaderBar.vue";
+export default {
+  name: "App",
+  components: { HeaderBar },
+};
+</script>
