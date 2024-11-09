@@ -1,6 +1,6 @@
 let axios = require("axios");
 
-exports.base_down_url = "http://127.0.0.1:3000/api";
+exports.base_down_url = "https://api.percival.wiregeek.ir/api";
 
 class PercivalBase {
   constructor(username, password) {
@@ -10,7 +10,7 @@ class PercivalBase {
       username: this.username,
       password: this.password,
     };
-    this.percival_api = "http://127.0.0.1:3000";
+    this.percival_api = "https://api.percival.wiregeek.ir";
   }
 }
 

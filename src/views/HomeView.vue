@@ -66,15 +66,19 @@
             <input class="userpass" type="text" :value="user.password" />
           </div>
 
-          <div class="m-3">
-            <label class="m-1">🔄</label>
-            <input
-              class="userpass"
-              type="number"
-              :value="refresh_rate"
-              readonly
-            />
-          </div>
+          <!--          <div class="m-3">-->
+          <!--            <label class="m-1">🔄</label>-->
+          <!--            <input-->
+          <!--              class="userpass"-->
+          <!--              type="number"-->
+          <!--              :value="refresh_rate"-->
+          <!--              readonly-->
+          <!--            />-->
+          <!--          </div>-->
+          <vue-qrcode
+            v-if="user.username"
+            :value="host + '/sendTo=' + user.username"
+          />
         </div>
       </div>
 
@@ -146,6 +150,7 @@ import TextList from "@/components/TextList";
 import LinkView from "@/components/LinkView";
 import { Files, Texts, Links, Users } from "@/percival_sdk";
 import Swal from "sweetalert2";
+import VueQrcode from "vue-qrcode";
 
 export default {
   name: "HomeView",
@@ -153,6 +158,7 @@ export default {
     TextList,
     FileList,
     LinkView,
+    VueQrcode,
   },
   data() {
     return {
@@ -170,6 +176,7 @@ export default {
         password: null,
       },
       refresh_rate: 5,
+      host: window.location.host,
     };
   },
   methods: {
