@@ -440,6 +440,7 @@ export default {
     setInterval(() => {
       this.refresh();
     }, this.refresh_rate * 1000);
+    this.username = this.$route.query?.sendTo;
   },
 };
 </script>
