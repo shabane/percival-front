@@ -77,7 +77,7 @@
           <!--          </div>-->
           <vue-qrcode
             v-if="user.username"
-            :value="host + '/sendTo=' + user.username"
+            :value="host + '/?sendTo=' + user.username"
           />
         </div>
       </div>
