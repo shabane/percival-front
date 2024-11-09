@@ -456,7 +456,7 @@ export default {
 .user-border {
   border: #2ecc71 1px solid;
   border-top: none;
-  height: 400px;
+  height: 500px;
   background-color: #373737;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
