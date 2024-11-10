@@ -5,8 +5,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./assets/style.css";
 import { isValidLink, usernamer, passworder } from "@/tools";
-
-// createApp(App).use(router).mount("#app");
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import Popper from "popper.js";
+window.Popper = Popper;
 
 function getCookieValue(cookieName) {
   return new Promise((resolve, reject) => {
