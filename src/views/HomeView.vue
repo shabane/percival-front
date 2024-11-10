@@ -282,16 +282,18 @@ export default {
           texts
             .listTexts()
             .then((res) => {
-              // this.texts = res;
-              for (let text of res) {
-                texts
-                  .getText(text.id)
-                  .then((oneText) => {
-                    this.texts.push(oneText.data);
-                  })
-                  .catch((err) => {
-                    console.log(err.message);
-                  });
+              if (this.texts.length < res.length) {
+                this.texts = [];
+                for (let text of res) {
+                  texts
+                    .getText(text.id)
+                    .then((oneText) => {
+                      this.texts.push(oneText.data);
+                    })
+                    .catch((err) => {
+                      console.log(err.message);
+                    });
+                }
               }
             })
             .catch((err) => {
@@ -426,9 +428,9 @@ export default {
     },
 
     refresh() {
-      this.files = [];
-      this.texts = [];
-      this.links = [];
+      // this.files = [];
+      // this.texts = [];
+      // this.links = [];
       this.get_files();
       this.get_texts();
       this.get_links();
