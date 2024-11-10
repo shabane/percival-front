@@ -347,16 +347,19 @@ export default {
             .listLinks()
             .then((res) => {
               // this.links = res;
-              for (let link of res) {
-                links
-                  .getLink(link.id)
-                  .then((_link) => {
-                    this.links.push(_link);
-                  })
-                  .catch((err) => {
-                    // use swal
-                    console.log(err.message);
-                  });
+              if (this.links.length < res.length) {
+                this.links = [];
+                for (let link of res) {
+                  links
+                    .getLink(link.id)
+                    .then((_link) => {
+                      this.links.push(_link);
+                    })
+                    .catch((err) => {
+                      // use swal
+                      console.log(err.message);
+                    });
+                }
               }
             })
             .catch((err) => {
