@@ -1,7 +1,7 @@
 <template>
   <div class="row user-item m-3">
     <span class="col-1">⬇️</span>
-    <a class="col" @click="copyToClip(text)">{{ text }}</a>
+    <pre class="col" @click="copyToClip(text)">{{ text }}</pre>
   </div>
 </template>
 
@@ -31,8 +31,9 @@ export default {
 </script>
 
 <style scoped>
-a {
+pre {
   text-decoration: none;
   color: #3498db;
+  overflow-x: hidden;
 }
 </style>
