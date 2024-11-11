@@ -81,7 +81,6 @@
           />
         </div>
       </div>
-
       <div
         class="g-3 bg-black bg-opacity-10"
         v-if="selected_tab !== 'setting_tab'"
@@ -324,6 +323,8 @@ export default {
                   text: "Text Sent > " + res.user,
                   icon: "success",
                 });
+                this.username = null;
+                this.input_text = null;
               }
             })
             .catch((err) => {
