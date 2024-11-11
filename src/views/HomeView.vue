@@ -39,6 +39,18 @@
 
       <div class="mt-3 scrollable-div">
         <div v-if="selected_tab === 'file_tab' && files">
+          <div v-if="loading">
+            <div class="spinner-grow text-secondary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow" style="color: #af7ac5" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-warning" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+
           <FileList
             v-for="file in files"
             :key="file.id"
@@ -176,6 +188,7 @@ export default {
       },
       refresh_rate: 5,
       host: window.location.host,
+      loading: false,
     };
   },
   methods: {
@@ -242,16 +255,19 @@ export default {
       if (this.file) {
         this.$getCredits()
           .then((credits) => {
+            this.loading = true;
             const files = new Files(credits.username, credits.password);
             files
               .postFile(this.file, this.username)
               .then((res) => {
                 if (res.status >= 400) {
+                  this.loading = false;
                   Swal.fire({
                     text: res.response.data,
                     icon: "error",
                   });
                 } else {
+                  this.loading = false;
                   Swal.fire({
                     text: "File Sent > " + res[0].user,
                     icon: "success",
