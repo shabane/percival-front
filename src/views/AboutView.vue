@@ -20,6 +20,15 @@
       <span style="color: #85929e">y</span>.
     </p>
     <hr style="width: 50%; margin-left: 25%" />
+
+    <p>
+      If you wonder that anyone can access your files, i should tell you that<br />
+      unless no one have your password and username at a same time, so no one<br />
+      can access your data except me!.<br />why me? just because i own the site
+      and run its server.
+    </p>
+    <hr style="width: 50%; margin-left: 25%" />
+
     <span style="color: #85929e">></span>
     <a href="https://github.com/shabane/percival"> Github </a>
     <br />
