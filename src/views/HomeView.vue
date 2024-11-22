@@ -32,7 +32,7 @@
             id="setting_tab"
             @click="select_tab('setting_tab')"
           >
-            ⚙️
+            👤
           </button>
         </div>
       </div>
