@@ -56,6 +56,7 @@
             :key="file.id"
             :file_name="file.id"
             @click="get_file(file.id)"
+            :sender="file.sender"
           />
         </div>
 
