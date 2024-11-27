@@ -54,7 +54,7 @@
           <FileList
             v-for="file in files"
             :key="file.id"
-            :file_name="file.id"
+            :file_name="file.name"
             @click="get_file(file.id)"
             :sender="file.sender"
           />
