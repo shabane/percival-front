@@ -1,7 +1,11 @@
 <template>
-  <div class="row user-item m-3">
-    <span class="col-1">⬇️</span>
-    <pre class="col" @click="copyToClip(text)">{{ text }}</pre>
+  <div class="row user-item m-3" @click="copyToClip(text)">
+    <div>
+      <span class="col-1 m-1">⬇️</span>
+      <span class="col-2 text-warning">@{{ sender }} </span>
+      <hr />
+    </div>
+    <pre class="col mt-3">{{ text }}</pre>
   </div>
 </template>
 
@@ -9,7 +13,7 @@
 import Swal from "sweetalert2";
 export default {
   name: "TextList",
-  props: ["text"],
+  props: ["text", "sender"],
 
   data() {
     return {};

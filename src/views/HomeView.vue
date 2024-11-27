@@ -60,7 +60,12 @@
         </div>
 
         <div v-if="selected_tab === 'text_tab'">
-          <TextList v-for="text in texts" :key="text.id" :text="text" />
+          <TextList
+            v-for="text in texts"
+            :key="text.id"
+            :text="text.text"
+            :sender="text.metadata.sender"
+          />
         </div>
 
         <div v-if="selected_tab === 'link_tab' && links">
@@ -303,7 +308,10 @@ export default {
                   texts
                     .getText(text.id)
                     .then((oneText) => {
-                      this.texts.push(oneText.data);
+                      this.texts.push({
+                        text: oneText.data,
+                        metadata: text,
+                      });
                     })
                     .catch((err) => {
                       console.log(err.message);
