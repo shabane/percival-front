@@ -1,6 +1,10 @@
 <template>
   <div class="row user-item m-3">
-    <span class="col-1">⬇️</span>
+    <div>
+      <span class="col-1">⬇️</span>
+      <span class="col-2 text-warning">@{{ sender }} </span>
+      <hr />
+    </div>
     <a class="col" :href="dest"> {{ dest }}</a>
   </div>
 </template>
@@ -9,7 +13,7 @@
 import Swal from "sweetalert2";
 export default {
   name: "TextList",
-  props: ["dest"],
+  props: ["dest", "sender"],
 
   data() {
     return {};

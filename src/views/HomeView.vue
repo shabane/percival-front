@@ -69,7 +69,12 @@
         </div>
 
         <div v-if="selected_tab === 'link_tab' && links">
-          <LinkView v-for="link in links" :key="link.id" :dest="link.dest" />
+          <LinkView
+            v-for="link in links"
+            :key="link.id"
+            :dest="link.dest.dest"
+            :sender="link.metadata.sender"
+          />
         </div>
 
         <div v-if="selected_tab === 'setting_tab'">
@@ -378,7 +383,10 @@ export default {
                   links
                     .getLink(link.id)
                     .then((_link) => {
-                      this.links.push(_link);
+                      this.links.push({
+                        dest: _link,
+                        metadata: link,
+                      });
                     })
                     .catch((err) => {
                       // use swal
